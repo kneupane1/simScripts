@@ -22,13 +22,21 @@ gemc -USE_GUI=0 -OUTPUT='evio, gemc.evio' -INPUT_GEN_FILE='lund, twopeg.dat'  rg
 
 evio2hipo -r 11 -t -1.00 -s -1.00 -i gemc.evio -o gemc.hipo
 
+# Run background merging
+bgMerginFilename.sh rga_fall2018 tor-1.00_sol-1.00 45nA_10604MeV get
+export bgFile = 'ls 0*.hipo'
+bg-merger -b $bgFile -i gemc.hipo -o gemc.merged.hipo -d 'DC,FTOF,ECAL,HTCC,LTCC,BST,BMT,CND,CTOF,FTCAL,FTHODO'
+
+# Run Reconstruction
 cp /jlab/clas12Tags/$CLAS12TAG/config/rga_fall2018.yaml rga_fall2018.yaml
-recon-util -y rga_fall2018.yaml -i gemc.hipo -o recon.hipo
+recon-util -y rga_fall2018.yaml -i gemc.merged.hipo -o recon.hipo
 
 
 rm twopeg.dat
 rm gemc.evio
 rm gemc.hipo
+rm gemc.merged.hipo
+rm 0*.hipo
 
 hipo-utils -filter -b 'RUN::*,RAW::epics,RAW::scaler,HEL::flip,HEL::online,REC::*,RECFT::*,MC::*' -merge -o dst.hipo recon.hipo
 
