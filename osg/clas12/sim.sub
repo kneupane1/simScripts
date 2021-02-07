@@ -14,7 +14,7 @@ log = logs/log_$(Cluster).$(Process).log
 #transfer_output_files = ""
 
 transfer_output_files = dst.hipo
-transfer_output_remaps = "dst.hipo = /public/kneupane/CLAS12/sim/clas12_twoPi_rga-fall2018_flagrad_2_$(Cluster)_$(Process).hipo"
+transfer_output_remaps = "dst.hipo = /public/kneupane/CLAS12/sim/clas12_twoPi_rga_fall2018_tor-1_sol-1_flagrad_2_bg_45nA_10604MeV_$(Cluster)_$(Process).hipo"
 
 request_cpus = 1
 request_memory = 512MB
