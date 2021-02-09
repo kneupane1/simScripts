@@ -24,7 +24,7 @@ evio2hipo -r 11 -t -1.00 -s -1.00 -i gemc.evio -o gemc.hipo
 
 # Run background merging
 bgMerginFilename.sh rga_fall2018 tor-1.00_sol-1.00 45nA_10604MeV get
-export bgFile='ls 0*.hipo'
+export bgFile=0*.hipo
 bg-merger -b $bgFile -i gemc.hipo -o gemc.merged.hipo -d 'DC,FTOF,ECAL,HTCC,LTCC,BST,BMT,CND,CTOF,FTCAL,FTHODO'
 
 # Run Reconstruction
